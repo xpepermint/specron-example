@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/xpepermint/specron-example.svg?branch=master)](https://travis-ci.org/xpepermint/specron-example)
+
 # Specron example
 
 Install the CLI.
