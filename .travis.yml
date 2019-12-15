@@ -1,5 +1,26 @@
----
 language: node_js
+
 node_js:
-  - 11
-  - 10
+  - 12
+
+install:
+  - npm install -g coveralls
+  - npm install -g @microsoft/rush
+  # install forked version of specron framework from github
+  - git clone --branch=backup https://github.com/captainheart/specron-framework.git ~/specron-framework
+  # add current repository as sub project of this monorepo in order to use sub packages
+  - cd .. && mv ./specron-example ~/specron-framework/packages/
+  - cd ~/specron-framework
+  - rush update # or `rush install`
+  - rush build
+  # add specron executable to $PATH manually since we can't install this local repo globally
+  # - export PATH=~/specron-framework/packages/specron-example/node_modules/@specron/cli/bin:$PATH
+  - export PATH=~/specron-framework/packages/specron-cli/bin:$PATH
+  - cd ./packages/specron-example
+
+script:
+  # - npm test # normal test
+  - npm run test-coverage # coverage enabled test
+
+after_success:
+  - cat coverage/lcov.info | coveralls  # for coverage enabled test

@@ -3,3 +3,8 @@
 node_modules
 dist
 build
+
+# solidity-coverage artifacts
+coverage/
+coverage.json
+allFiredEvents

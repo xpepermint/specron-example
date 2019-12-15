@@ -1,23 +1,32 @@
 {
-  "name": "myproject",
+  "name": "specron-example",
   "description": ".",
   "version": "0.0.0",
   "scripts": {
+    "build": "echo 'nothing'",
     "compile": "specron compile",
     "sandbox": "specron sandbox",
     "prepare": "specron compile",
-    "test": "specron compile && specron test"
+    "test": "specron compile && specron test",
+    "test-coverage": "./node_modules/.bin/solidity-coverage"
   },
   "specron": {
     "compiler": {
-      "build": "./build",
+      "build": "./build/contracts",
       "match": [
-        "./src/**/*.sol"
+        "./contracts/**/*.sol"
       ]
     },
+    "sandbox": {
+      "port": 8545,
+      "host": "localhost"
+    },
     "test": {
+      "server": false,
+      "port": 8545,
+      "host": "localhost",
       "match": [
-        "./src/**/*.test.*"
+        "./tests/**/*.test.*"
       ]
     },
     "require": [
@@ -32,5 +41,8 @@
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1",
     "web3": "^1.0.0-beta.36"
+  },
+  "devDependencies": {
+    "solidity-coverage": "^0.6.7"
   }
 }
